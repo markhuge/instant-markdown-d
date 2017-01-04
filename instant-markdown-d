@@ -109,13 +109,6 @@ function httpHandler(req, res) {
         .pipe(res);
       break;
 
-    // case 'HEAD':
-      // res.writeHead(200);
-      // res.end();
-      // exec('open -g http://localhost:8090', function(error, stdout, stderr){
-        // http.request({port: 8090})
-      // });
-      // break;
 
     case 'DELETE':
       io.sockets.emit('die');
@@ -141,13 +134,6 @@ io.sockets.on('connection', function(sock){
 
 
 function onListening() {
-  if (os.platform() === 'win32') {
-    exec('start /b http://localhost:8090', function(error, stdout, stderr){});
-  } else if (os.platform() === 'darwin') {
-    exec('open -g http://localhost:8090', function(error, stdout, stderr){});
-  } else { // assume unix/linux
-    exec('xdg-open http://localhost:8090', function(error, stdout, stderr){});
-  }
   readAllInput(process.stdin, function(body) {
     writeMarkdown(body);
   });
